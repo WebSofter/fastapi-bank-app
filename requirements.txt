@@ -1,0 +1,21 @@
+# FastAPI и ASGI-сервер
+fastapi==0.115.0
+uvicorn[standard]==0.34.0  # включает uvloop, httptools и др.
+
+# Работа с базой данных
+sqlalchemy==2.0.0
+psycopg2-binary==2.9.10
+alembic==1.16.2
+
+# Валидация и настройки
+pydantic==2.11.7
+pydantic-settings==2.9.1
+
+# Загрузка файлов
+python-multipart==0.0.20
+
+# JWT авторизация
+python-jose[cryptography]==3.5.0
+
+# Хеширование паролей
+passlib[bcrypt]==1.7.4
