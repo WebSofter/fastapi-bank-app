@@ -24,7 +24,7 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=${DB_URL}
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST_DOCKER}:${DB_PORT}/${DB_NAME}
       - SECRET_KEY=${SECRET_KEY}
       - ALGORITHM=${ALGORITHM}
       
