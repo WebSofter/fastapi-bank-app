@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
 from datetime import datetime
 import re
@@ -8,7 +8,7 @@ class CompanyBase(BaseModel):
     inn: str = Field(..., min_length=10, max_length=12, description="ИНН компании")
     description: Optional[str] = Field(None, max_length=1000, description="Описание компании")
     
-    @validator('inn')
+    @field_validator('inn')
     def validate_inn(cls, v):
         if not re.match(r'^\d{10}$|^\d{12}$', v):
             raise ValueError('ИНН должен содержать 10 или 12 цифр')
@@ -22,7 +22,7 @@ class CompanyUpdate(BaseModel):
     inn: Optional[str] = Field(None, min_length=10, max_length=12)
     description: Optional[str] = Field(None, max_length=1000)
     
-    @validator('inn')
+    @field_validator('inn')
     def validate_inn(cls, v):
         if v and not re.match(r'^\d{10}$|^\d{12}$', v):
             raise ValueError('ИНН должен содержать 10 или 12 цифр')

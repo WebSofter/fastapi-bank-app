@@ -23,6 +23,10 @@ pip install -r requirements.txt
 ```bash
 alembic upgrade head
 ```
+или отметить текущую миграцию как выполненную без реального выполнения
+```bash
+alembic stamp head
+```
 
 7. Запустите сервер:
 

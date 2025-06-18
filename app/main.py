@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from .database import engine
-from .models import Base
+from .database import Base
 from .routers import companies_router, banks_router, bank_accounts_router
 
 # Создаем таблицы

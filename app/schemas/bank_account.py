@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 from datetime import datetime
 import re
@@ -8,9 +8,9 @@ class BankAccountBase(BaseModel):
     company_id: int = Field(..., description="ID компании")
     bank_id: int = Field(..., description="ID банка")
     currency: str = Field("RUB", min_length=3, max_length=3, description="Валюта счета")
-    is_active: str = Field("Y", regex="^[YN]$", description="Активен ли счет (Y/N)")
+    is_active: str = Field("Y", pattern="^[YN]$", description="Активен ли счет (Y/N)")
     
-    @validator('account_number')
+    @field_validator('account_number')
     def validate_account_number(cls, v):
         if not re.match(r'^\d{20}$', v):
             raise ValueError('Номер счета должен содержать 20 цифр')
@@ -24,9 +24,9 @@ class BankAccountUpdate(BaseModel):
     company_id: Optional[int] = None
     bank_id: Optional[int] = None
     currency: Optional[str] = Field(None, min_length=3, max_length=3)
-    is_active: Optional[str] = Field(None, regex="^[YN]$")
+    is_active: Optional[str] = Field(None, pattern="^[YN]$")
     
-    @validator('account_number')
+    @field_validator('account_number')
     def validate_account_number(cls, v):
         if v and not re.match(r'^\d{20}$', v):
             raise ValueError('Номер счета должен содержать 20 цифр')
@@ -41,7 +41,7 @@ class BankAccountResponse(BankAccountBase):
     
     class Config:
         from_attributes = True
-        
+
 # Обновляем forward references
 from .company import CompanyResponse
 from .bank import BankResponse

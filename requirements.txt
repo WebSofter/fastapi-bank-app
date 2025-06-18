@@ -19,3 +19,5 @@ python-jose[cryptography]==3.5.0
 
 # Хеширование паролей
 passlib[bcrypt]==1.7.4
+
+python-dotenv==1.1.0
